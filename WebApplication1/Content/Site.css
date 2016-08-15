@@ -22,3 +22,11 @@ select,
 textarea {
     max-width: 280px;
 }
+
+.col-sm-4 {
+    border: 1px solid black;    
+    padding-left: 3em;
+    padding-bottom: 0em;
+    width: 33%;
+    min-height: 350px;
+}

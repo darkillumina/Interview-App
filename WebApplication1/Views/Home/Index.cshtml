@@ -4,7 +4,7 @@
 
 <div class="row">
     <div class="col-md-4">
-        <h2>Testing stuff here</h2>        
+        <h2>Videos</h2>        
         <p>Page Id: <textarea rows="1" cols="50" id="pageId">8245623462</textarea></p>
         @*<p><a class="btn btn-default" onclick="testStuff()">Test link &raquo;</a></p>*@
         <p><a class="btn btn-default" onclick="getVideos(0)" >Get Videos &raquo;</a></p>
@@ -70,27 +70,20 @@
         facebookCall.then(
             // Log the resolve value, add videos to list of divs, set next and previous link
             function (val) {
-                //console.log(val);
-                //console.log(val.paging.next);
-                //testVal = val;
                 var videoListDiv = document.createElement('div');
                 videoListDiv.className = 'row';
                 videoListDiv.id = 'videoList';
-                val.data.forEach(function outputVideos(element, index, array) {
-                    //console.log(element.embed_html);
+                val.data.forEach(function outputVideos(element, index, array) {                    
                     var videoDiv = document.createElement('div');
                     videoDiv.className = 'col-sm-4';
                     // check to see if we have a title or description for the video
-                    element.title != null ? videoDiv.innerHTML += '<p>' + element.title + '</p>' : element.description != null ? videoDiv.innerHTML += '<p>' + element.description + '</p>' : videoDiv.innerHTML += '<p>Untitled</p>'
-                    //videoDiv.innerHTML += '<p>' + element.embed_html + '</p>';
+                    element.title != null ? videoDiv.innerHTML += '<p>' + element.title + '</p>' : element.description != null ? videoDiv.innerHTML += '<p>' + element.description + '</p>' : videoDiv.innerHTML += '<p>Untitled</p>'                    
                     // normalize height and width of the videos
                     var embedString = element.embed_html;
                     console.log(embedString.match(/src="(.*?)"/)[0]);
                     embedString.replace(/width="\d*"/, "width=\"300\"");
-                    embedString.replace(/height="\d*"/, "height=\"200\"");
-                    //videoDiv.innerHTML += element.embed_html;
-                    console.log(embedString);
-                    //videoDiv.innerHTML += embedString;
+                    embedString.replace(/height="\d*"/, "height=\"200\"");                    
+                    console.log(embedString);                   
                     videoDiv.innerHTML += '<iframe ' + embedString.match(/src="(.*?)"/)[0] + ' width="300" height="200" frameborder="1"></iframe>';
                     videoDiv.innerHTML += '<p>Likes: ' + element.likes.summary.total_count + '</p>';
                     videoDiv.innerHTML += '<p>Comments: ' + element.comments.summary.total_count + '</p>';
